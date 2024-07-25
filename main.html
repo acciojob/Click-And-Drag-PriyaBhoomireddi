@@ -45,6 +45,7 @@
     slider.classList.add('active');
     startX = e.pageX - slider.offsetLeft;
     scrollLeft = slider.scrollLeft;
+    console.log('Mouse down:', { startX, scrollLeft });
   });
 
   slider.addEventListener('mouseleave', () => {
@@ -62,7 +63,9 @@
     e.preventDefault();
     const x = e.pageX - slider.offsetLeft;
     const walk = (x - startX) * 3; // Adjust the scroll speed as needed
+    console.log('Mouse move:', { x, walk });
     slider.scrollLeft = scrollLeft - walk;
+    console.log('New scrollLeft:', slider.scrollLeft);
   });
 </script>
 </body>
