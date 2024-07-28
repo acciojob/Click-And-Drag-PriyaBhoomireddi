@@ -1,13 +1,16 @@
 cy.get('.items').then($items => {
-  // store initial scroll position
   const initialScrollLeft = $items[0].scrollLeft;
+  console.log('Initial scrollLeft:', initialScrollLeft);
 
-  // set new scroll position
-  $items[0].scrollLeft = 100;
+  cy.get('.items')
+    .trigger('mousedown', { which: 1, pageX: 493, pageY: 391 })
+    .trigger('mousemove', { pageX: 271, pageY: 391 })
+    .wait(100) // Increase wait time before mouseup
+    .trigger('mouseup', { force: true });
 
-  // check if scroll position has been updated
-  cy.get('.items').should($newItems => {
-    const finalScrollLeft = $newItems[0].scrollLeft;
+  cy.get('.items').should($items => {
+    const finalScrollLeft = $items[0].scrollLeft;
+    console.log('Final scrollLeft:', finalScrollLeft);
     expect(finalScrollLeft).to.be.greaterThan(initialScrollLeft);
   });
 });
